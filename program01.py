@@ -48,7 +48,7 @@ def ex1(int_seq, subtotal):
                 result += 1
                 while indice_lista + 1 < len(numbers) and numbers[indice_lista+1] == 0:
                     result += 1
-                    indice_lista += 1 sergio
+                    indice_lista += 1 
 
                 numbers.pop(0)
                 break  
