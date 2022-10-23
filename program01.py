@@ -29,6 +29,7 @@ NOTA: il timeout previsto per questo esercizio è di 1 secondo per ciascun test 
 ATTENZIONE: quando caricate il file assicuratevi che sia nella codifica UTF8
     (ad esempio editatelo dentro Spyder)
 '''
+from bdb import Breakpoint
 import time
 
 def ex1(int_seq, subtotal):
@@ -39,28 +40,32 @@ def ex1(int_seq, subtotal):
 
     while fine_lista == False:
         sum_substring = 0
-        indice_lista = 0
 
+        correct_sum = False
+        idx = 1
         for x in numbers:
-            sum_substring += x
+            if correct_sum == False:
+                sum_substring += x
 
-            if sum_substring == subtotal:
-                result += 1
-                while indice_lista + 1 < len(numbers) and numbers[indice_lista+1] == 0:
+                if sum_substring == subtotal:
                     result += 1
-                    indice_lista += 1 
+                    correct_sum = True                    
+                elif sum_substring > subtotal:
+                    numbers.pop(0)
+                    break
+            else:
+                if x == 0:
+                    result += 1
+                else:
+                    numbers.pop(0)
+                    break
 
-                numbers.pop(0)
-                break  
-            elif sum_substring > subtotal:
-                numbers.pop(0)
-                break
-            
-            if len(numbers)-1 == indice_lista:
+            if len(numbers) == idx:
                 fine_lista = True
                 break
 
-            indice_lista += 1
+            idx +=1   
+
     return result
     
 if __name__ == '__main__':
